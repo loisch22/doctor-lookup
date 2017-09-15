@@ -62,7 +62,6 @@ Doctors.prototype.doctorName = function(name, state, city) {
         $("#doctors-result table").append("<tr>");
         $("#doctors-result table").append("<td>");
         $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name + " " + body.data[i].profile.title);
-        // $("#doctors-result table").append("<br>" + "<p>Website: </p>" + body.data[i].website + "<br>" + "<p>Accepts new patients: " + body.data[i].practices.accepts_new_patients + "<br>");
         $("#doctors-result table").append("</td>");
         $("#doctors-result table").append("</tr>");
         console.log(body.data[i].accepts_new_patients);
