@@ -37,7 +37,7 @@ Doctors.prototype.symptom = function(symptom) {
 Doctors.prototype.doctorName = function(name, state, city) {
   let promiseDoctor = new Promise(function(resolve, reject) {
     let xhr = new XMLHttpRequest();
-    let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=${name}&location=wa-seattle&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076`;
+    let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=${name}&location=${state}-${city}&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076`;
     xhr.onload = function() {
       if (xhr.status === 200) {
         resolve(xhr.response);
@@ -51,13 +51,18 @@ Doctors.prototype.doctorName = function(name, state, city) {
   promiseDoctor.then(function(response) {
     let body = JSON.parse(response);
     $('#doctors-result table').empty();
-    for(var i=0; i < body.data.length; i++) {
-      $("#doctors-result table").append("<tr>");
-      $("#doctors-result table").append("<td>");
-      $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name + " " + body.data[i].profile.title);
-      $("#doctors-result table").append("</td>");
-      $("#doctors-result table").append("</tr>");
+    if (body.data.length > 0) {
+      for(var i=0; i < body.data.length; i++) {
+        $("#doctors-result table").append("<tr>");
+        $("#doctors-result table").append("<td>");
+        $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name + " " + body.data[i].profile.title);
+        $("#doctors-result table").append("</td>");
+        $("#doctors-result table").append("</tr>");
+      }
+    } else if (body.data.length === 0 || undefined || null) {
+      $('#doctors-result table').append("Sorry, there were no doctos that matched your search criteria.");
     }
+
     }, function(error) {
       $('#errors').text("There was an error while processing your request: ${error.message}. Please try again.");
   });

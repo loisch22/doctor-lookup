@@ -19,14 +19,14 @@ $(function() {
   $('#doctor-form').submit(function(event) {
     event.preventDefault();
     let nameSearch = $('#name').val();
-    let stateSearch = $('.state').val();
-    let citySearch = $('.city').val();
+    let stateSearch = $('#stateDoc').val();
+    let citySearch = $('#cityDoc').val();
     let name = nameSearch.toLowerCase();
     let state = stateSearch.toLowerCase();
     let city = citySearch.toLowerCase();
     $('#name').val("");
-    $('.state').val("");
-    $('.city').val("");
+    $('#stateDoc').val("");
+    $('#cityDoc').val("");
     let doctor = new Doctors();
     let doctors = doctor.doctorName(name, state, city);
   });
