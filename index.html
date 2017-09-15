@@ -10,7 +10,7 @@
   </head>
   <body>
     <h1>Find the doctor you need <span class="emphasize">now</span></h1>
-    <h3>Search by symptom</h3>
+    <h3>Search by medical issue</h3>
     <form id="symptom-form" class="form-group">
       <label for="symptom">Enter your symptom:</label>
       <input type="text" id="symptom" class="form-control">
@@ -22,9 +22,11 @@
       <input type="text" id="name" class="form-control">
       <button type="submit" class="btn-default symptom-btn">Find Doctor</button>
     </form>
+    <button type="button" id="clear-results" class="btn btn-danger">Clear Results</button>
     <div id="doctors-result">
       <table>
       </table>
     </div>
+    <div id="errors"></div>
   </body>
 </html>

@@ -19,9 +19,8 @@ Doctors.prototype.symptom = function (symptom) {
   });
   promiseSymptom.then(function (response) {
     var body = JSON.parse(response);
-    console.log(body.data.length);
+    $('#doctors-result table').empty();
     for (var i = 0; i < body.data.length; i++) {
-      console.log("for loop");
       $("#doctors-result table").append("<tr>");
       $("#doctors-result table").append("<td>");
       $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name);
@@ -30,6 +29,35 @@ Doctors.prototype.symptom = function (symptom) {
     }
   }, function (error) {
     $('#doctors-result').text("There was an error while processing your request: ${error.message}. Please try again.");
+  });
+};
+
+Doctors.prototype.doctorName = function (name) {
+  var promiseDoctor = new Promise(function (resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    var url = "https://api.betterdoctor.com/2016-03-01/doctors?name=" + name + "&location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076";
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        resolve(xhr.response);
+      } else {
+        reject(Error(xhr.statusText));
+      }
+    };
+    xhr.open("GET", url, true);
+    xhr.send();
+  });
+  promiseDoctor.then(function (response) {
+    var body = JSON.parse(response);
+    $('#doctors-result table').empty();
+    for (var i = 0; i < body.data.length; i++) {
+      $("#doctors-result table").append("<tr>");
+      $("#doctors-result table").append("<td>");
+      $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name);
+      $("#doctors-result table").append("</td>");
+      $("#doctors-result table").append("</tr>");
+    }
+  }, function (error) {
+    $('#errors').text("There was an error while processing your request: ${error.message}. Please try again.");
   });
 };
 
@@ -45,46 +73,22 @@ $(function () {
     event.preventDefault();
     var symptomSearch = $('#symptom').val();
     var symptom = symptomSearch.toLowerCase();
-    console.log(symptom);
     $('#symptom').val("");
     var doctor = new Doctors();
-    var doctorArr = doctor.symptom(symptom);
+    var doctors = doctor.symptom(symptom);
+  });
 
-    // $('#doctor-form').submit(function(event) {
-    //   event.preventDefault();
-    //   let nameSearch = $('#name').val();
-    //   let name = nameSearch.toLowerCase();
-    //   console.log(name);
-    //   $('#symptom').val("");
-    //   // let doctor = new Doctor();
-    //   // let doctorArr = doctor.symptom(symptomLower);
-    //   // console.log(doctorArr);
-    //
-    //   let promiseDoctor = new Promise(function(resolve, reject) {
-    //     let xhr = new XMLHttpRequest();
-    //     let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=${name}&location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076`;
-    //     xhr.onload = function() {
-    //       if (xhr.status === 200) {
-    //         resolve(xhr.response);
-    //       } else {
-    //         reject(Error(xhr.statusText));
-    //       }
-    //     };
-    //     xhr.open("GET", url, true);
-    //     xhr.send();
-    //   });
-    //   promiseDoctor.then(function(response) {
-    //     let body = JSON.parse(response);  //
-    //     for(var i=0; i < body.data.length; i++) {
-    //       console.log("for loop");
-    //       $("#doctors-result table").append("<tr>");
-    //       $("#dotors-result table").append("<td>");
-    //       $("#dotors-result table").append(body[i].data.profile.first_name);
-    //       $("#dotors-result table").append("</tr>");
-    //     }
-    //     }, function(error) {
-    //       $('#doctors-result').text("There was an error while processing your request: ${error.message}. Please try again.");
-    //   });
+  $('#doctor-form').submit(function (event) {
+    event.preventDefault();
+    var nameSearch = $('#name').val();
+    $('#name').val("");
+    var name = nameSearch.toLowerCase();
+    console.log(name);
+    var doctor = new Doctors();
+    var doctors = doctor.doctorName(name);
+  });
+  $('#clear-results').click(function () {
+    $('#doctors-result').html("");
   });
 });
 
