@@ -37,7 +37,7 @@ Doctors.prototype.symptom = function(symptom) {
 Doctors.prototype.doctorName = function(name, state, city) {
   let promiseDoctor = new Promise(function(resolve, reject) {
     let xhr = new XMLHttpRequest();
-    let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=${name}&location=${state}-${city}&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=${apiKey}`;
+    let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=${name}&location=wa-seattle&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076`;
     xhr.onload = function() {
       if (xhr.status === 200) {
         resolve(xhr.response);
