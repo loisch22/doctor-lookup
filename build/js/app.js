@@ -32,10 +32,12 @@ Doctors.prototype.symptom = function (symptom) {
   });
 };
 
-Doctors.prototype.doctorName = function (name) {
+// https://api.betterdoctor.com/2016-03-01/doctors?query=${symptom}&location=${state}-${city}&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076
+
+Doctors.prototype.doctorName = function (name, state, city) {
   var promiseDoctor = new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest();
-    var url = "https://api.betterdoctor.com/2016-03-01/doctors?name=" + name + "&location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076";
+    var url = "https://api.betterdoctor.com/2016-03-01/doctors?name=jason&location=" + state + "-" + city + "&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076\n";
     xhr.onload = function () {
       if (xhr.status === 200) {
         resolve(xhr.response);
@@ -53,6 +55,7 @@ Doctors.prototype.doctorName = function (name) {
       $("#doctors-result table").append("<tr>");
       $("#doctors-result table").append("<td>");
       $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name);
+      $("#doctors-result table").append("<br>" + body.data[i].phones.number + "<br>" + "<p>Accepts new patients: " + body.data[i].practices.accepts_new_patients + "<br>");
       $("#doctors-result table").append("</td>");
       $("#doctors-result table").append("</tr>");
     }
@@ -81,11 +84,16 @@ $(function () {
   $('#doctor-form').submit(function (event) {
     event.preventDefault();
     var nameSearch = $('#name').val();
-    $('#name').val("");
+    var stateSearch = $('#state').val();
+    var citySearch = $('#city').val();
     var name = nameSearch.toLowerCase();
-    console.log(name);
+    var state = stateSearch.toLowerCase();
+    var city = citySearch.toLowerCase();
+    $('#name').val("");
+    $('#state').val("");
+    $('#city').val("");
     var doctor = new Doctors();
-    var doctors = doctor.doctorName(name);
+    var doctors = doctor.doctorName(name, state, city);
   });
   $('#clear-results').click(function () {
     $('#doctors-result').html("");

@@ -31,10 +31,13 @@ Doctors.prototype.symptom = function(symptom) {
   });
 };
 
-Doctors.prototype.doctorName = function(name) {
+// https://api.betterdoctor.com/2016-03-01/doctors?query=${symptom}&location=${state}-${city}&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076
+
+Doctors.prototype.doctorName = function(name, state, city) {
   let promiseDoctor = new Promise(function(resolve, reject) {
     let xhr = new XMLHttpRequest();
-    let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=${name}&location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076`;
+    let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=jason&location=${state}-${city}&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076
+`;
     xhr.onload = function() {
       if (xhr.status === 200) {
         resolve(xhr.response);
@@ -52,6 +55,7 @@ Doctors.prototype.doctorName = function(name) {
       $("#doctors-result table").append("<tr>");
       $("#doctors-result table").append("<td>");
       $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name);
+      $("#doctors-result table").append("<br>" + body.data[i].phones.number + "<br>" + "<p>Accepts new patients: " + body.data[i].practices.accepts_new_patients + "<br>");
       $("#doctors-result table").append("</td>");
       $("#doctors-result table").append("</tr>");
     }
