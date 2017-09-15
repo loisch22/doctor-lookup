@@ -52,15 +52,19 @@ Doctors.prototype.doctorName = function(name, state, city) {
   promiseDoctor.then(function(response) {
     let body = JSON.parse(response);
     $('#doctors-result table').empty();
-    for(var i=0; i < body.data.length; i++) {
-      $("#doctors-result table").append("<tr>");
-      $("#doctors-result table").append("<td>");
-      $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name);
-      // $("#doctors-result table").append("<br>" + "<p>Website: </p>" + body.data[i].website + "<br>" + "<p>Accepts new patients: " + body.data[i].practices.accepts_new_patients + "<br>");
-      $("#doctors-result table").append("</td>");
-      $("#doctors-result table").append("</tr>");
-      console.log(body.data[i].accepts_new_patients);
-    }
+    if (body.data.length > 0) {
+      for(var i=0; i < body.data.length; i++) {
+        $("#doctors-result table").append("<tr>");
+        $("#doctors-result table").append("<td>");
+        $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name + " " + body.data[i].profile.title);
+        // $("#doctors-result table").append("<br>" + "<p>Website: </p>" + body.data[i].website + "<br>" + "<p>Accepts new patients: " + body.data[i].practices.accepts_new_patients + "<br>");
+        $("#doctors-result table").append("</td>");
+        $("#doctors-result table").append("</tr>");
+        console.log(body.data[i].accepts_new_patients);
+      }
+    } else if (body.data.length === 0) {
+        $('#doctors-result table').append("Sorry, there were no doctors that matched your criteria.");
+      }
     }, function(error) {
       $('#errors').text("There was an error while processing your request. Please try again.");
   });
