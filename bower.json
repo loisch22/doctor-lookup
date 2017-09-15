@@ -1,0 +1,22 @@
+{
+  "name": "doctor-lookup",
+  "description": "",
+  "main": "gulpfile.js",
+  "authors": [
+    "Lois Choi <loisch22@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/loisch22/job-list",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "bootstrap": "^3.3.7",
+    "moment": "^2.18.1"
+  }
+}
