@@ -3,6 +3,19 @@
   float: right;
   letter-spacing: 2px;
 }
+.search-btn {
+  float: right;
+  padding: 7px;
+  font-size: 16px;
+  background: #03a8f9;
+  letter-spacing: 2px;
+  border: none;
+}
+.search-btn:hover {
+  background: 	#40f2f6;
+  color: #242424;
+  border: solid #9ce8ee 2px;
+}
 .top-bar {
   background: #05defd;
   margin: 0;
@@ -50,4 +63,9 @@ input {
   margin: 20px;
   padding: 30px;
   object-position: center;
+}
+#doctors-result, #errors, table {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 30%;
 }

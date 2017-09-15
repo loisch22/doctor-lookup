@@ -36,5 +36,6 @@ $(function() {
   });
   $('#clear-results').click(function() {
     $('#doctors-result').html("");
+    $('.showClear').hide();
   });
 });
