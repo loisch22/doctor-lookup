@@ -8,10 +8,10 @@ var apiKey = require('./../.env').apiKey;
 
 var Doctors = function Doctors() {};
 
-Doctors.prototype.symptom = function (symptom) {
+Doctors.prototype.symptom = function (symptom, state, city) {
   var promiseSymptom = new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest();
-    var url = 'https://api.betterdoctor.com/2016-03-01/doctors?query=' + symptom + '&location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=' + apiKey;
+    var url = 'https://api.betterdoctor.com/2016-03-01/doctors?query=' + symptom + '&location=' + state + '-' + city + '&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=' + apiKey;
     xhr.onload = function () {
       if (xhr.status === 200) {
         resolve(xhr.response);
@@ -40,7 +40,7 @@ Doctors.prototype.symptom = function (symptom) {
 Doctors.prototype.doctorName = function (name, state, city) {
   var promiseDoctor = new Promise(function (resolve, reject) {
     var xhr = new XMLHttpRequest();
-    var url = 'https://api.betterdoctor.com/2016-03-01/doctors?name=' + name + '&location=' + state + '-' + city + '&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076';
+    var url = 'https://api.betterdoctor.com/2016-03-01/doctors?name=' + name + '&location=' + state + '-' + city + '&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=' + apiKey;
     xhr.onload = function () {
       if (xhr.status === 200) {
         resolve(xhr.response);
@@ -81,14 +81,14 @@ $(function () {
   $('#symptom-form').submit(function (event) {
     event.preventDefault();
     var symptomSearch = $('#symptom').val();
-    var stateSearch = $('.state').val();
-    var citySearch = $('.city').val();
+    var stateSearch = $('#stateSymp').val();
+    var citySearch = $('#citySymp').val();
     var symptom = symptomSearch.toLowerCase();
     var state = stateSearch.toLowerCase();
     var city = citySearch.toLowerCase();
     $('#symptom').val("");
-    $('.state').val("");
-    $('.city').val("");
+    $('#stateSymp').val("");
+    $('#citySymp').val("");
     var doctor = new Doctors();
     var doctors = doctor.symptom(symptom, state, city);
   });

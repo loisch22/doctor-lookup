@@ -4,14 +4,14 @@ $(function() {
   $('#symptom-form').submit(function(event) {
     event.preventDefault();
     let symptomSearch = $('#symptom').val();
-    let stateSearch = $('.state').val();
-    let citySearch = $('.city').val();
+    let stateSearch = $('#stateSymp').val();
+    let citySearch = $('#citySymp').val();
     let symptom = symptomSearch.toLowerCase();
     let state = stateSearch.toLowerCase();
     let city = citySearch.toLowerCase();
     $('#symptom').val("");
-    $('.state').val("");
-    $('.city').val("");
+    $('#stateSymp').val("");
+    $('#citySymp').val("");
     let doctor = new Doctors();
     let doctors = doctor.symptom(symptom, state, city);
   });
