@@ -62,7 +62,7 @@ Doctors.prototype.doctorName = function(name, state, city) {
         $("#doctors-result table").append("</tr>");
         console.log(body.data[i].accepts_new_patients);
       }
-    } else if (body.data.length === 0) {
+    } else if (body.data.length === 0 || undefined) {
         $('#doctors-result table').append("Sorry, there were no doctors that matched your criteria.");
       }
     }, function(error) {
