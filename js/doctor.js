@@ -51,7 +51,7 @@ Doctors.prototype.doctorName = function(name) {
     for(var i=0; i < body.data.length; i++) {
       $("#doctors-result table").append("<tr>");
       $("#doctors-result table").append("<td>");
-      $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name);
+      $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name + " " + body.data[i].profile.title);
       $("#doctors-result table").append("</td>");
       $("#doctors-result table").append("</tr>");
     }
