@@ -4,10 +4,10 @@ let Doctors = function() {
 
 };
 
-Doctors.prototype.symptom = function(symptom) {
+Doctors.prototype.symptom = function(symptom, state, city) {
   let promiseSymptom = new Promise(function(resolve, reject) {
     let xhr = new XMLHttpRequest();
-    let url = `https://api.betterdoctor.com/2016-03-01/doctors?query=${symptom}&location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=${apiKey}`;
+    let url = `https://api.betterdoctor.com/2016-03-01/doctors?query=${symptom}&location=${state}-${city}&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=${apiKey}`;
     xhr.onload = function() {
       if (xhr.status === 200) {
         resolve(xhr.response);
@@ -21,19 +21,24 @@ Doctors.prototype.symptom = function(symptom) {
   promiseSymptom.then(function(response) {
     let body = JSON.parse(response);
     $('#doctors-result table').empty();
-    for(let i = 0; i < body.data.length; i++) {
-      $("#doctors-result table").append("<tr>");
-      $("#doctors-result table").append("<td>");
-      $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name);
-      $("#doctors-result table").append("</td>");
-      $("#doctors-result table").append("</tr>");
-    }
+    console.log(body.data.length);
+    if (body.data.length > 0) {
+      for(let i = 0; i < body.data.length; i++) {
+        $("#doctors-result table").append("<tr>");
+        $("#doctors-result table").append("<td>");
+        $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name + " " + body.data[i].profile.title);
+        $("#doctors-result table").append("</td>");
+        $("#doctors-result table").append("</tr>");
+      }
+    } else if (body.data.length === 0 || undefined) {
+      $('#doctors-result table').append("Sorry, there were no doctors that matched your criteria.");
+      }
     }, function(error) {
       $('#doctors-result').text("There was an error while processing your request. Please try again.");
   });
 };
 
-// https://api.betterdoctor.com/2016-03-01/doctors?query=${symptom}&location=${state}-${city}&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076
+
 
 Doctors.prototype.doctorName = function(name, state, city) {
   let promiseDoctor = new Promise(function(resolve, reject) {
@@ -57,7 +62,7 @@ Doctors.prototype.doctorName = function(name, state, city) {
         $("#doctors-result table").append("<tr>");
         $("#doctors-result table").append("<td>");
         $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name + " " + body.data[i].profile.title);
-        // $("#doctors-result table").append("<br>" + "<p>Website: </p>" + body.data[i].website + "<br>" + "<p>Accepts new patients: " + body.data[i].practices.accepts_new_patients + "<br>");
+        // $("#doctors-result table").append("<br>" + "Address: " + body.data[i].practices.visit_address.street + "<br>" + body.data[i].practices.visit_address.city + ", " + body.data[i].practices.visit_address.state + " " + body.data[i].practices.visit_address.zip + "<br>"+ "Website: " + body.data[i].practices.website + "<br>" + "Accepts new patients: " + body.data[i].practices.accepts_new_patients + "<br>");
         $("#doctors-result table").append("</td>");
         $("#doctors-result table").append("</tr>");
         console.log(body.data[i].accepts_new_patients);
