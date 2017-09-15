@@ -1,0 +1,53 @@
+.showClear {
+  display: none;
+  float: right;
+  letter-spacing: 2px;
+}
+.top-bar {
+  background: #05defd;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  color: 	#242424;
+  font-size: 20px;
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 5px;
+}
+.header {
+  background-image: url('../img/doctors1.jpeg');
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-attachment: fixed;
+  margin-top: 0;
+  padding: 15%;
+  text-align: center;
+}
+.header-text {
+  background: #ffffff;
+  opacity: .6;
+  padding: 5%;
+  font-size: 40px;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 5px;
+}
+.title {
+  letter-spacing: 2px;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 30px;
+  color: 	#03a8f9;
+}
+.label {
+  color: #000000;
+  font-size: 20px;
+  font-family: 'Roboto Condensed', sans-serif;
+  letter-spacing: 2px;
+}
+input {
+  margin: 15px;
+}
+.col {
+  margin: 20px;
+  padding: 30px;
+  object-position: center;
+}

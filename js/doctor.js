@@ -22,13 +22,18 @@ Doctors.prototype.symptom = function(symptom, state, city) {
   promiseSymptom.then(function(response) {
     let body = JSON.parse(response);
     $('#doctors-result table').empty();
-    for(let i = 0; i < body.data.length; i++) {
-      $("#doctors-result table").append("<tr>");
-      $("#doctors-result table").append("<td>");
-      $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name);
-      $("#doctors-result table").append("</td>");
-      $("#doctors-result table").append("</tr>");
+    if (body.data.length > 0) {
+      for(let i = 0; i < body.data.length; i++) {
+        $("#doctors-result table").append("<tr>");
+        $("#doctors-result table").append("<td>");
+        $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name + " " + body.data[i].profile.title);
+        $("#doctors-result table").append("</td>");
+        $("#doctors-result table").append("</tr>");
+      }
+    } else if (body.data.length === 0 || undefined || null) {
+      $('#doctors-result table').append("Sorry, there were no doctos that matched your search criteria.");
     }
+
     }, function(error) {
       $('#doctors-result').text("There was an error while processing your request: ${error.message}. Please try again.");
   });
