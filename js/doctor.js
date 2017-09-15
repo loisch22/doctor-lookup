@@ -1,3 +1,5 @@
+var apiKey = require('./../.env').apiKey;
+
 let Doctors = function() {
 
 };
@@ -5,7 +7,7 @@ let Doctors = function() {
 Doctors.prototype.symptom = function(symptom) {
   let promiseSymptom = new Promise(function(resolve, reject) {
     let xhr = new XMLHttpRequest();
-    let url = `https://api.betterdoctor.com/2016-03-01/doctors?query=${symptom}&location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076`;
+    let url = `https://api.betterdoctor.com/2016-03-01/doctors?query=${symptom}&location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=${apiKey}`;
     xhr.onload = function() {
       if (xhr.status === 200) {
         resolve(xhr.response);
@@ -27,7 +29,7 @@ Doctors.prototype.symptom = function(symptom) {
       $("#doctors-result table").append("</tr>");
     }
     }, function(error) {
-      $('#doctors-result').text("There was an error while processing your request: ${error.message}. Please try again.");
+      $('#doctors-result').text("There was an error while processing your request. Please try again.");
   });
 };
 
@@ -36,8 +38,7 @@ Doctors.prototype.symptom = function(symptom) {
 Doctors.prototype.doctorName = function(name, state, city) {
   let promiseDoctor = new Promise(function(resolve, reject) {
     let xhr = new XMLHttpRequest();
-    let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=jason&location=${state}-${city}&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076
-`;
+    let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=jason&location=${state}-${city}&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=${apiKey}`;
     xhr.onload = function() {
       if (xhr.status === 200) {
         resolve(xhr.response);
@@ -50,17 +51,19 @@ Doctors.prototype.doctorName = function(name, state, city) {
   });
   promiseDoctor.then(function(response) {
     let body = JSON.parse(response);
+    console.log(body.data.practices);
     $('#doctors-result table').empty();
     for(var i=0; i < body.data.length; i++) {
       $("#doctors-result table").append("<tr>");
       $("#doctors-result table").append("<td>");
       $("#doctors-result table").append(body.data[i].profile.first_name + " " + body.data[i].profile.last_name);
-      $("#doctors-result table").append("<br>" + body.data[i].phones.number + "<br>" + "<p>Accepts new patients: " + body.data[i].practices.accepts_new_patients + "<br>");
+      // $("#doctors-result table").append("<br>" + "Address: " + body.data[i].practices.visit_address.street + "<br>" + body.data[i].practices.visit_address.city + ", " + body.data[i].practices.visit_address.state + " " + body.data[i].practices.visit_address.zip + "<br>"+ "Website: " + body.data[i].website + "<br>" + "Accepts new patients: " + body.data[i].practices.accepts_new_patients + "<br>");
       $("#doctors-result table").append("</td>");
       $("#doctors-result table").append("</tr>");
+      console.log(body.data[i].accepts_new_patients);
     }
     }, function(error) {
-      $('#errors').text("There was an error while processing your request: ${error.message}. Please try again.");
+      $('#errors').text("There was an error while processing your request. Please try again.");
   });
 };
 
