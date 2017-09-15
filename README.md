@@ -22,7 +22,7 @@ _2. Sign up to get API key from: <a>https://developer.betterdoctor_
 | 3. Doctors information should include his/her full name, address, phone number, accepting new patients | Click 'Jason' | View 'Jason' results |
 | 4. If there is an error, an error message is shown | 'Search' | 'Sorry there was an error while processing your information. Please try again.' |
 | 5. User is notified if no doctors match their search criteria | 'dance syndrome' | 'Sorry there are no doctors that match your search criteria.' |
-| 6. User enters age and receives Jupiter years | 1 | 4,329 (actual 4328.9) |
+
 
 
 ## Exentensions/Wish list
