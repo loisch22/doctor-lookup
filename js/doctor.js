@@ -1,3 +1,6 @@
+var apiKey = require('./../.env').apiKey;
+
+
 let Doctors = function() {
 
 };
@@ -5,7 +8,7 @@ let Doctors = function() {
 Doctors.prototype.symptom = function(symptom) {
   let promiseSymptom = new Promise(function(resolve, reject) {
     let xhr = new XMLHttpRequest();
-    let url = `https://api.betterdoctor.com/2016-03-01/doctors?query=${symptom}&location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076`;
+    let url = `https://api.betterdoctor.com/2016-03-01/doctors?query=${symptom}&location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=${apiKey}`;
     xhr.onload = function() {
       if (xhr.status === 200) {
         resolve(xhr.response);
@@ -34,7 +37,7 @@ Doctors.prototype.symptom = function(symptom) {
 Doctors.prototype.doctorName = function(name) {
   let promiseDoctor = new Promise(function(resolve, reject) {
     let xhr = new XMLHttpRequest();
-    let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=${name}&location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=55d30b31fbdf0081b273945f7ddd0076`;
+    let url = `https://api.betterdoctor.com/2016-03-01/doctors?name=${name}&location=37.773%2C-122.413%2C100&user_location=37.773%2C-122.413&skip=0&limit=10&user_key=${apiKey}`;
     xhr.onload = function() {
       if (xhr.status === 200) {
         resolve(xhr.response);
