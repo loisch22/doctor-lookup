@@ -27,15 +27,7 @@ _2. Sign up to get API key from: <a>https://developer.betterdoctor_
 
 ## Exentensions/Wish list
 
-_I want to gain a better understanding of how to get values from an API. I was able to get the values that were in the 'profile' key, but all else gave me undefined or cause my application to break. I entered the following code and it was unable to return a value:
-
-```
-$("#doctors-result table").append("<br>" + "Address: " + body.data[i].practices.visit_address.street + "<br>" + body.data[i].practices.visit_address.city + ", " + body.data[i].practices.visit_address.state + " " + body.data[i].practices.visist_address.zip + "<br>" + "Phone number: " + body.data[i].phones.number + "<br>" + "Website: " + body.data[i].practices.website + "<br>" + "<p>Accepts new patients: " + body.data[i].practices.accepts_new_patients + "<br>");
-```
-
-Would like to get help then implement this into the project.
-_
-<br>
+_I would want to work on the layout of this page to make it appear more professional_
 
 
 ## Known Bugs
