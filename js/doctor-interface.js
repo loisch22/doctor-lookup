@@ -16,6 +16,7 @@ $(function() {
     let doctors = doctor.symptom(symptom, state, city);
 
     $('.showClear').show();
+    $('.result-info').show();
   });
 
   $('#doctor-form').submit(function(event) {
@@ -33,9 +34,11 @@ $(function() {
     let doctors = doctor.doctorName(name, state, city);
 
     $('.showClear').show();
+    $('.result-info').show();
   });
   $('#clear-results').click(function() {
     $('#doctors-result').html("");
     $('.showClear').hide();
+    $('.result-info').hide();
   });
 });

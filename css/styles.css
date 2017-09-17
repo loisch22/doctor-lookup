@@ -1,3 +1,6 @@
+.result-info {
+  display: none;
+}
 .showClear {
   display: none;
   float: right;
