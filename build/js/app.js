@@ -32,6 +32,8 @@ Doctors.prototype.symptom = function (symptom, state, city) {
         $("#doctors-result table").append("<strong>" + body.data[i].profile.first_name + " " + body.data[i].profile.last_name + " " + body.data[i].profile.title + "</strong>" + "<br>");
         $("#doctors-result table").append("<strong>" + "Address: " + "</strong>" + body.data[i].practices[0].visit_address.street + "<br>" + body.data[i].practices[0].visit_address.city + ", " + body.data[i].practices[0].visit_address.state + "<br>");
         $("#doctors-result table").append("<strong>" + "Phone: " + "</strong>" + body.data[i].practices[0].phones[0].number + "<br>");
+        $("#doctors-result table").append("<strong>" + "Website: " + "</strong>" + body.data[i].practices[0].website + "<br>");
+        $("#doctors-result table").append("<strong>" + "Accepts new patients: " + "</strong>" + body.data[i].practices[0].accepts_new_patients + "<br>" + "<hr>");
         $("#doctors-result table").append("</td>");
         $("#doctors-result table").append("</tr>");
       }
@@ -66,6 +68,9 @@ Doctors.prototype.doctorName = function (name, state, city) {
         $("#doctors-result table").append("<td>");
         $("#doctors-result table").append("<strong>" + body.data[i].profile.first_name + " " + body.data[i].profile.last_name + " " + body.data[i].profile.title + "</strong>" + "<br>");
         $("#doctors-result table").append("<strong>" + "Address: " + "</strong>" + body.data[i].practices[0].visit_address.street + "<br>" + body.data[i].practices[0].visit_address.city + ", " + body.data[i].practices[0].visit_address.state + "<br>");
+        $("#doctors-result table").append("<strong>" + "Phone: " + "</strong>" + body.data[i].practices[0].phones[0].number + "<br>");
+        $("#doctors-result table").append("<strong>" + "Website: " + "</strong>" + body.data[i].practices[0].website + "<br>");
+        $("#doctors-result table").append("<strong>" + "Accepts new patients: " + "</strong>" + body.data[i].practices[0].accepts_new_patients + "<br>" + "<hr>");
         $("#doctors-result table").append("</td>");
         $("#doctors-result table").append("</tr>");
       }
